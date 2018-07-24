@@ -13,8 +13,8 @@ import os
 print("Pulling tile data from keep...")
 
 tiled_data_dir = "/data-sdd/home/kfang/keep/by_id/su92l-4zz18-b8rs5x7t6gry16k/"
-def get_file(name, np = True):
-    if np: 
+def get_file(name, np_file = True):
+    if np_file: 
         return np.load(os.path.join(tiled_data_dir, name))
     else:
         return open(os.path.join(tiled_data_dir, name), 'r')
@@ -22,7 +22,7 @@ def get_file(name, np = True):
 all_data = get_file("all.npy")
 
 nnz = np.count_nonzero(all_data, axis=0)
-fracnnz = np.divide(nnz.astype(float, all_data.shape[0]))
+fracnnz = np.divide(nnz.astype(float), all_data.shape[0])
 
 idxKeep = fracnnz >= .90
 idxOP = np.arange(all_data.shape[1])
