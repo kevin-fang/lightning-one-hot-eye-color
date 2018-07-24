@@ -2,11 +2,11 @@ from sklearn.svm import LinearSVC
 from sklearn import preprocessing
 from sklearn.preprocessing import OneHotEncoder
 import numpy as np
+import collections
 import pandas as pd
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
-%matplotlib inline
 import os
 
 # pull the tile data from keep
@@ -20,6 +20,7 @@ def get_file(name, np_file = True):
         return open(os.path.join(tiled_data_dir, name), 'r')
 
 all_data = get_file("all.npy")
+all_data += 2
 
 nnz = np.count_nonzero(all_data, axis=0)
 fracnnz = np.divide(nnz.astype(float), all_data.shape[0])
@@ -30,7 +31,7 @@ all_data = all_data[:, idxKeep]
 
 # save data with eye color information
 print("Saving eye color information...")
-exludeHazel = True
+excludeHazel = True
 
 # read names that have provided survey eye color data
 columns = ['name', 'timestamp', 'id', 'blood_type', 'height', 'weight', 'hw_comments', 'left', 'right', 'left_desc', 'right_desc', 'eye_comments', 'hair', 'hair_desc', 'hair_comments', 'misc', 'handedness']
@@ -41,7 +42,7 @@ surveyData = pd.read_csv("./eye_color_data/PGP-Survey.csv", names=columns, na_va
 # names of the pgp participants
 surveyNames = np.asarray(surveyData['name'].values.tolist())
 
-names_file = get_file("names.npy", np = False)
+names_file = get_file("names.npy", np_file = False)
 names = []
 for line in names_file:
     names.append(line[:-1])
@@ -129,8 +130,10 @@ np.save("varvals.npy", varvals)
 
 # one hot encode the data - fit, transform, then save for future processing
 print("Encoding data...")
+enc = OneHotEncoder()
 transformed = enc.fit(knownData)
 data = enc.transform(knownData)
 encoded = data.toarray()
 np.save("data_encoded.npy", encoded)
 print("Finished saving data.")  
+
