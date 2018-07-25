@@ -1,2 +1,4 @@
 *.npy
+*.swp
 .ipynb_checkpoints/
+npy_data/*.npy
