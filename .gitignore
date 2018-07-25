@@ -1,4 +1,6 @@
 *.npy
+*.pkl
+tile-searcher/*
 *.swp
 .ipynb_checkpoints/
 npy_data/*.npy
