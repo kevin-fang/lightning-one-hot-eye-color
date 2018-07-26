@@ -30,4 +30,4 @@ outputs:
   out2:
     type: File[]
     outputBinding:
-      glob: "*npz"
+      glob: "*npy"
