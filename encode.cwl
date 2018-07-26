@@ -5,7 +5,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 requirements:
   - class: DockerRequirement
-    dockerPull: kfang/scitools
+    dockerPull: kfang/scitool_old
   - class: InlineJavascriptRequirement
   - class: ResourceRequirement
     ramMin: 150000
@@ -30,4 +30,4 @@ outputs:
   out2:
     type: File[]
     outputBinding:
-      glob: "*npy"
+      glob: "*npz"

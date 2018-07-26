@@ -14,4 +14,6 @@ enc = OneHotEncoder()
 transformed = enc.fit_transform(arr)
 
 print("Encoding finished. Saving as encode.npy")
-np.save("encoded.npy", transformed.toarray())
+#np.save("encoded.npy", transformed.toarray())
+import scipy
+scipy.sparse.save_npz("encoded.npz", transformed)

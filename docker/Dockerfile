@@ -32,7 +32,7 @@ RUN apt-get update -y && \
 
 # install python specific packages
 RUN pip install --upgrade pip==9.0.3 && \ 
-    pip install sklearn \
+    pip install scikit-learn==0.19.1 \
         matplotlib \
         pandas \
         scipy \
